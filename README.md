@@ -7,7 +7,7 @@ This is an Angular Project made with the Angular Material and the main applicati
 # Configurations
 
 * Angular Material:
-	`ng add @angular/materia`
+	`ng add @angular/material`
 
 * HammerJS:
 	`npm install --save hammerjs`
