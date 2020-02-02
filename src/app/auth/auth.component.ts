@@ -76,7 +76,7 @@ export class AuthComponent implements OnInit {
 			},
 			err => {
 				console.log(err);
-				if (err.error.message == "invalid token") {
+				if (err.error.message == "invalid token" || err.error.errorMsg == "Failed to authenticate token") {
 					this.danger = true;
 					this.isLoading = false;
 					this.form.reset();
