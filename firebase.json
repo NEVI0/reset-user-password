@@ -1,5 +1,6 @@
 {
   "hosting": {
+	"site": "expenses-web-system-reset-pass",
     "public": "dist/reset-password",
     "ignore": [
       "firebase.json",
