@@ -76,7 +76,7 @@ export class AuthComponent implements OnInit {
 			},
 			err => {
 				console.log(err);
-				if (err.error.message == "invalid token" || err.error.errorMsg == "Failed to authenticate token") {
+				if (err.error.message == "invalid token" || err.error.message == "Failed to authenticate token") {
 					this.danger = true;
 					this.isLoading = false;
 					this.form.reset();
@@ -84,7 +84,7 @@ export class AuthComponent implements OnInit {
 					this.form.get('password').disable();
 				} else {
 					this.isLoading = false;
-					this.snackbar.open(err.error.errorMsg, "Ok");
+					this.snackbar.open(err.error.message, "Ok");
 				}
 			}
 		);
