@@ -64,7 +64,7 @@ export class AuthComponent implements OnInit {
 		/* HTTP Request */
 		this.http.post<any>(`${this.BlockedApiUrl}/resetPass`, JSON.parse(stringfy), {
 			headers: new HttpHeaders({
-				'Authorization': this.token /* Header with tge application Token */
+				'Authorization': this.token /* Header with the application Token */
 			})
 		}).pipe(
 			take(1)
@@ -75,16 +75,20 @@ export class AuthComponent implements OnInit {
 				this.form.reset();
 			},
 			err => {
-				console.log(err);
-				if (err.error.message == "invalid token" || err.error.message == "Failed to authenticate token") {
+				if (err.error.message == "invalid token" || err.error.message == "Failed to authenticate token" || err.error.errorMsg == "Failed to authenticate token") {
 					this.danger = true;
 					this.isLoading = false;
 					this.form.reset();
 					this.form.get('email').disable();
 					this.form.get('password').disable();
+					this.snackbar.open("Ocorreu um error na ação!", "Ok", {
+						duration: 3500
+					});
 				} else {
 					this.isLoading = false;
-					this.snackbar.open(err.error.message, "Ok");
+					this.snackbar.open(err.error.message, "Ok", {
+						duration: 3500
+					});
 				}
 			}
 		);

@@ -1,8 +1,12 @@
 <div class="login-page">
-	<mat-card class="mat-elevation-z12" *ngIf="success == false; else successMsg">
+	<mat-card class="mat-elevation-z12" *ngIf="danger == false && success == false">
 		<mat-card-title style="text-align:center;">Redefinição de Senha</mat-card-title>
 
 		<mat-card-content>
+			<div class="information">
+				<p>Essa página só estará ativa durante 1 hora, se por acaso você não conseguir redefinir a sua senha tente reenviar o e-mail ou entre em contato conosco <strong>nevio.dev@gmail.com</strong></p>
+			</div>
+
 			<form [formGroup]="form" (ngSubmit)="onReset()">
 
 				<mat-form-field appearance="outline" hideRequiredMarker>
@@ -17,36 +21,40 @@
 					<mat-icon matSuffix>lock</mat-icon>
 
 					<mat-error *ngIf="form.get('password').hasError('required')">
-						A senha é <strong>obrigatória</strong>
+						Você <strong>precisa</strong> informar a sua nova senha!
 					</mat-error>
 				</mat-form-field>
 
-				<button type="submit" class="reset-button" color="primary" mat-raised-button
+				<button type="submit" class="reset-btn"
 					[disabled]="!form.valid || isLoading"
 				>
-					{{ isLoading ? 'Carregando...' : 'Redefinir' }}
+					{{ isLoading ? 'Carregando...' : 'Redefinir Senha' }}
 				</button>
+
+				<div class="footer">
+					<small>Equipe de desenvolvedores da <strong>Despesas Net</strong></small>
+				</div>
 
 			</form>
 		</mat-card-content>
 	</mat-card>
 
-	<ng-template #successMsg>
-		<mat-card class="mat-elevation-z12">
-			<mat-card-title style="text-align:center; color: #11bf25">Sucesso!</mat-card-title>
+	<mat-card class="mat-elevation-z12" *ngIf="success == true">
+		<mat-card-title style="text-align:center; color: #6200ea">Sucesso!</mat-card-title>
 
-			<mat-card-content align="center">
-				<p>Sua senha foi atualizada com Sucesso! Agora você pode voltar a usar o sistema.</p>
-				<p>:)</p>
-			</mat-card-content>
-		</mat-card>
-	</ng-template>
+		<mat-card-content align="center">
+			<p style="margin-bottom: 10px;">Sua senha foi atualizada com Sucesso! Agora você pode voltar a usar o sistema.</p>
+		</mat-card-content>
+	</mat-card>
 
 	<mat-card class="mat-elevation-z12" *ngIf="danger == true">
 		<mat-card-title style="text-align:center; color: #D32F2F">Alerta!</mat-card-title>
 
-		<mat-card-content align="center">
-			<p>O seu Token está inválido ou expirou, tente enviar outro email para redefinir sua senha.</p>
+		<mat-card-content class="error">
+			<p>
+				Ocorreu um error enquanto redefiniamos a sua senha. Possivelmente o <strong>tempo limite de 1 hora expirou</strong>
+				ou está inválido. Tente enviar outro e-mail para redefinir a sua senha, se o erro persistir entre em contato conosco <strong style="color: #6200ea">nevio.dev@gmail.com</strong>
+			</p>
 		</mat-card-content>
 	</mat-card>
 </div>
